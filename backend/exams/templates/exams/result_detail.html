@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Result Details</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Exam:</strong> {{ object.exam.title }}</li>
+    <li class="list-group-item"><strong>Student:</strong> {{ object.student.user.username }}</li>
+    <li class="list-group-item"><strong>Marks Obtained:</strong> {{ object.marks_obtained }}</li>
+    <li class="list-group-item"><strong>Grade:</strong> {{ object.grade }}</li>
+</ul>
+<a href="{% url 'result_edit' object.pk %}" class="btn btn-warning mt-3">Edit</a>
+<a href="{% url 'result_delete' object.pk %}" class="btn btn-danger mt-3">Delete</a>
+<a href="{% url 'result_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

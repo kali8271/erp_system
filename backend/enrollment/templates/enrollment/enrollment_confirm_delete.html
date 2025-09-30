@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Delete Enrollment</h1>
+<p>Are you sure you want to delete enrollment of <strong>{{ object.student.user.username }}</strong> in <strong>{{ object.section.course.code }}-{{ object.section.section_code }}</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a href="{% url 'enrollment_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

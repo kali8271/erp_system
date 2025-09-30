@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Fines</h2>
+<a href="{% url 'fine_create' %}" class="btn btn-success mb-3">Add Fine</a>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Reason</th>
+      <th>Amount</th>
+      <th>Issued Date</th>
+      <th>Paid</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fine in fines %}
+    <tr>
+      <td>{{ fine.student.user.username }}</td>
+      <td>{{ fine.reason }}</td>
+      <td>{{ fine.amount }}</td>
+      <td>{{ fine.issued_date }}</td>
+      <td>{{ fine.is_paid }}</td>
+      <td>
+        <a href="{% url 'fine_detail' fine.id %}" class="btn btn-info btn-sm">View</a>
+        <a href="{% url 'fine_update' fine.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'fine_delete' fine.id %}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No fines available.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Attendance Records</h1>
+<a href="{% url 'attendance:attendance_add' %}" class="btn btn-primary">Add Attendance</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in object_list %}
+        <tr>
+            <td>{{ record.student.user.get_full_name }}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.status }}</td>
+            <td>
+                <a href="{% url 'attendance:attendance_detail' record.pk %}">View</a> |
+                <a href="{% url 'attendance:attendance_edit' record.pk %}">Edit</a> |
+                <a href="{% url 'attendance:attendance_delete' record.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No attendance records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

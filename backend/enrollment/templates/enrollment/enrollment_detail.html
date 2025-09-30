@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Enrollment Details</h1>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Student:</strong> {{ object.student.user.username }}</li>
+    <li class="list-group-item"><strong>Section:</strong> {{ object.section.course.code }}-{{ object.section.section_code }}</li>
+    <li class="list-group-item"><strong>Status:</strong> {{ object.status }}</li>
+    <li class="list-group-item"><strong>Enrollment Date:</strong> {{ object.enrollment_date|date:"Y-m-d H:i" }}</li>
+</ul>
+<a href="{% url 'enrollment_edit' object.pk %}" class="btn btn-warning mt-3">Edit</a>
+<a href="{% url 'enrollment_delete' object.pk %}" class="btn btn-danger mt-3">Delete</a>
+<a href="{% url 'enrollment_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

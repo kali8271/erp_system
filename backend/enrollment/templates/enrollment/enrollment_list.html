@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Enrollments</h1>
+<a href="{% url 'enrollment_add' %}" class="btn btn-primary">Add Enrollment</a>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Section</th>
+            <th>Status</th>
+            <th>Enrollment Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enrollment in enrollments %}
+        <tr>
+            <td>{{ enrollment.student.user.username }}</td>
+            <td>{{ enrollment.section.course.code }}-{{ enrollment.section.section_code }}</td>
+            <td>{{ enrollment.status }}</td>
+            <td>{{ enrollment.enrollment_date|date:"Y-m-d H:i" }}</td>
+            <td>
+                <a href="{% url 'enrollment_detail' enrollment.pk %}">View</a> |
+                <a href="{% url 'enrollment_edit' enrollment.pk %}">Edit</a> |
+                <a href="{% url 'enrollment_delete' enrollment.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No enrollments found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

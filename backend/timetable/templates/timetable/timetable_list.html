@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Timetable</h1>
+<a href="{% url 'timetable:timetable_add' %}" class="btn btn-primary">Add Timetable</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Section</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Room</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.course.name }}</td>
+            <td>{{ item.section.name }}</td>
+            <td>{{ item.day }}</td>
+            <td>{{ item.start_time }} - {{ item.end_time }}</td>
+            <td>{{ item.room }}</td>
+            <td>
+                <a href="{% url 'timetable:timetable_detail' item.pk %}">View</a> |
+                <a href="{% url 'timetable:timetable_edit' item.pk %}">Edit</a> |
+                <a href="{% url 'timetable:timetable_delete' item.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No timetable entries found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

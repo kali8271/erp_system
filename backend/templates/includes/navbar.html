@@ -1,0 +1,44 @@
+<nav class="bg-blue-600 text-white p-4 flex justify-between items-center">
+  <!-- Logo / Brand -->
+  <div class="font-bold text-xl">
+    <a href="{% url 'home' %}" class="hover:text-gray-200">Uni ERP</a>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="flex gap-4 items-center">
+    <li><a href="{% url 'dashboard' %}" class="hover:underline hover:text-gray-200">Dashboard</a></li>
+
+    <!-- Users Menu -->
+    <li>
+      <a href="{% url 'accounts:user_list' %}" class="hover:underline hover:text-gray-200">Users</a>
+    </li>
+
+    <!-- Academics Dropdown -->
+    <li class="relative group">
+      <button class="hover:underline hover:text-gray-200 flex items-center gap-1">
+        Academics
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <ul class="absolute left-0 mt-2 bg-white text-black rounded shadow-lg hidden group-hover:block">
+        <li><a href="{% url 'academics:department_list' %}" class="block px-4 py-2 hover:bg-gray-200">Departments</a></li>
+        <li><a href="{% url 'academics:course_list' %}" class="block px-4 py-2 hover:bg-gray-200">Courses</a></li>
+        <li><a href="{% url 'academics:section_list' %}" class="block px-4 py-2 hover:bg-gray-200">Sections</a></li>
+      </ul>
+    </li>
+
+    <li><a href="{% url 'notices:notice_list' %}" class="hover:underline hover:text-gray-200">Notices</a></li>
+
+    <!-- Authentication -->
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'accounts:logout' %}" class="hover:underline hover:text-gray-200">Logout</a></li>
+      <li>
+    <button onclick="openSignupModal()" class="hover:underline">Signup New User</button>
+  </li>
+    {% else %}
+      <li><a href="{% url 'accounts:login' %}" class="hover:underline hover:text-gray-200">Login</a></li>
+      <!-- <li><a href="{% url 'accounts:register' %}" class="hover:underline">Register</a></li> -->
+    {% endif %}
+  </ul>
+</nav>

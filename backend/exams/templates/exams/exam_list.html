@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Exams</h1>
+<a href="{% url 'exams:exam_add' %}" class="btn btn-primary">Add Exam</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Exam Name</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exam in object_list %}
+        <tr>
+            <td>{{ exam.name }}</td>
+            <td>{{ exam.course.name }}</td>
+            <td>{{ exam.date|date:"d M Y H:i" }}</td>
+            <td>
+                <a href="{% url 'exams:exam_detail' exam.pk %}">View</a> |
+                <a href="{% url 'exams:exam_edit' exam.pk %}">Edit</a> |
+                <a href="{% url 'exams:exam_delete' exam.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No exams found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

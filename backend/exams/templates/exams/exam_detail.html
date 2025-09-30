@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p><strong>Course:</strong> {{ object.course.name }}</p>
+<p><strong>Date:</strong> {{ object.date|date:"d M Y H:i" }}</p>
+<p><strong>Duration:</strong> {{ object.duration }} minutes</p>
+
+<a href="{% url 'exams:exam_edit' object.pk %}" class="btn btn-warning mt-3">Edit</a>
+<a href="{% url 'exams:exam_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

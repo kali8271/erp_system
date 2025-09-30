@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Payment Details</h2>
+<ul>
+  <li><strong>Student:</strong> {{ payment.student.user.username }}</li>
+  <li><strong>Amount:</strong> {{ payment.amount }}</li>
+  <li><strong>Date:</strong> {{ payment.payment_date }}</li>
+  <li><strong>Method:</strong> {{ payment.method }}</li>
+  <li><strong>Reference:</strong> {{ payment.reference }}</li>
+</ul>
+<a href="{% url 'payment_update' payment.id %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'payment_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

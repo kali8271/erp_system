@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Department Details</h2>
+  <p><strong>Code:</strong> {{ object.code }}</p>
+  <p><strong>Name:</strong> {{ object.name }}</p>
+
+  <a href="{% url 'academics:department_edit' object.id %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'academics:department_delete' object.id %}" class="btn btn-danger">Delete</a>
+  <a href="{% url 'academics:department_list' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

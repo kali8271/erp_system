@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p><strong>Author:</strong> {{ object.created_by.username }}</p>
+<p><strong>Date:</strong> {{ object.created_at|date:"d M Y H:i" }}</p>
+<p>{{ object.content }}</p>
+
+<a href="{% url 'notices:notice_edit' object.pk %}" class="btn btn-warning mt-3">Edit</a>
+<a href="{% url 'notices:notice_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

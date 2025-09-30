@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Timetable Detail</h1>
+
+<ul class="list-group mt-3">
+    <li class="list-group-item"><strong>Course:</strong> {{ object.course.name }}</li>
+    <li class="list-group-item"><strong>Section:</strong> {{ object.section.name }}</li>
+    <li class="list-group-item"><strong>Day:</strong> {{ object.day }}</li>
+    <li class="list-group-item"><strong>Time:</strong> {{ object.start_time }} - {{ object.end_time }}</li>
+    <li class="list-group-item"><strong>Room:</strong> {{ object.room }}</li>
+</ul>
+
+<a href="{% url 'timetable:timetable_edit' object.pk %}" class="btn btn-warning mt-3">Edit</a>
+<a href="{% url 'timetable:timetable_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

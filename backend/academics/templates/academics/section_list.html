@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Sections</h2>
+  <a href="{% url 'academics:section_add' %}" class="btn btn-primary mb-3">Add Section</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Section</th>
+        <th>Teacher</th>
+        <th>Semester</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for section in object_list %}
+      <tr>
+        <td>{{ section.course.title }}</td>
+        <td>{{ section.section_code }}</td>
+        <td>{{ section.teacher.user.username|default:"N/A" }}</td>
+        <td>{{ section.semester }}</td>
+        <td>
+          <a href="{% url 'academics:section_detail' section.id %}" class="btn btn-sm btn-info">View</a>
+          <a href="{% url 'academics:section_edit' section.id %}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="{% url 'academics:section_delete' section.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No sections found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

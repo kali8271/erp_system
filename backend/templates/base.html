@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Uni ERP{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <div class="font-bold text-xl">
+      <a href="{% url 'home' %}">Uni ERP</a>
+    </div>
+    <ul class="flex gap-4 items-center">
+      <li><a href="{% url 'dashboard' %}" class="hover:underline">Dashboard</a></li>
+      <li><a href="{% url 'accounts:user_list' %}" class="hover:underline">Users</a></li>
+
+      <!-- Academics Dropdown -->
+      <li class="relative group">
+        <button class="hover:underline hover:text-gray-200 flex items-center gap-1">
+          Academics
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <ul class="absolute left-0 mt-2 bg-white text-black rounded shadow-lg hidden group-hover:block">
+          <li><a href="{% url 'academics:department_list' %}" class="block px-4 py-2 hover:bg-gray-200">Departments</a></li>
+          <li><a href="{% url 'academics:course_list' %}" class="block px-4 py-2 hover:bg-gray-200">Courses</a></li>
+          <li><a href="{% url 'academics:section_list' %}" class="block px-4 py-2 hover:bg-gray-200">Sections</a></li>
+        </ul>
+      </li>
+
+      <li><a href="{% url 'notices:notice_list' %}" class="hover:underline">Notices</a></li>
+
+      {% if user.is_authenticated %}
+        <li>
+          <button id="openSignupModal" class="hover:underline">Add User</button>
+        </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}" class="hover:underline">Logout</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'accounts:login' %}" class="hover:underline">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Messages -->
+  {% if messages %}
+    <div class="container mx-auto mt-4">
+      {% for message in messages %}
+        <div class="p-3 mb-2 rounded {{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content -->
+  <main class="container mx-auto p-6">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Signup Modal -->
+  {% if user.is_authenticated %}
+<div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-lg p-6 w-96">
+    <h2 class="text-xl font-bold mb-4">Create New User</h2>
+    <form method="post" action="{% url 'accounts:user_add' %}">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" class="border p-2 w-full mb-2" required>
+      <input type="email" name="email" placeholder="Email" class="border p-2 w-full mb-2" required>
+      <input type="text" name="first_name" placeholder="First Name" class="border p-2 w-full mb-2">
+      <input type="text" name="last_name" placeholder="Last Name" class="border p-2 w-full mb-2">
+      <input type="password" name="password1" placeholder="Password" class="border p-2 w-full mb-2" required>
+      <input type="password" name="password2" placeholder="Confirm Password" class="border p-2 w-full mb-4" required>
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Create User</button>
+      <button type="button" id="closeModal" class="bg-gray-300 px-4 py-2 rounded ml-2">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Show popup (you can trigger this with a button or any event)
+  function openSignupModal() {
+    document.getElementById('signupModal').classList.remove('hidden');
+  }
+
+  document.getElementById('closeModal').addEventListener('click', function(){
+    document.getElementById('signupModal').classList.add('hidden');
+  });
+</script>
+{% endif %}
+
+</body>
+</html>

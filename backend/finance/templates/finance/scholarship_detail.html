@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Scholarship Details</h2>
+<ul>
+  <li><strong>Student:</strong> {{ scholarship.student.user.username }}</li>
+  <li><strong>Name:</strong> {{ scholarship.name }}</li>
+  <li><strong>Amount:</strong> {{ scholarship.amount }}</li>
+  <li><strong>Awarded Date:</strong> {{ scholarship.awarded_date }}</li>
+</ul>
+<a href="{% url 'scholarship_update' scholarship.id %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'scholarship_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

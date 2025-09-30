@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Exam Results</h1>
+<a href="{% url 'result_add' %}" class="btn btn-primary">Add Result</a>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Exam</th>
+            <th>Student</th>
+            <th>Marks Obtained</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.exam.title }}</td>
+            <td>{{ result.student.user.username }}</td>
+            <td>{{ result.marks_obtained }}</td>
+            <td>{{ result.grade }}</td>
+            <td>
+                <a href="{% url 'result_detail' result.pk %}">View</a> |
+                <a href="{% url 'result_edit' result.pk %}">Edit</a> |
+                <a href="{% url 'result_delete' result.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No results found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

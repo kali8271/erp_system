@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Fees{% endblock %}
+{% block content %}
+<h2>Fees</h2>
+<a class="btn btn-primary mb-3" href="{% url 'finance:fee_add' %}">Add Fee</a>
+<table class="table table-bordered">
+    <tr>
+        <th>Student</th>
+        <th>Amount</th>
+        <th>Due Date</th>
+        <th>Paid</th>
+        <th>Actions</th>
+    </tr>
+    {% for fee in object_list %}
+    <tr>
+        <td>{{ fee.student.user.username }}</td>
+        <td>{{ fee.amount }}</td>
+        <td>{{ fee.due_date }}</td>
+        <td>{{ fee.is_paid }}</td>
+        <td>
+            <a href="{% url 'finance:fee_detail' fee.pk %}" class="btn btn-info btn-sm">View</a>
+            <a href="{% url 'finance:fee_edit' fee.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'finance:fee_delete' fee.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

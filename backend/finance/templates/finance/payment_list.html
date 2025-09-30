@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Payments{% endblock %}
+{% block content %}
+<h2>Payments</h2>
+<a class="btn btn-primary mb-3" href="{% url 'finance:payment_add' %}">Add Payment</a>
+<table class="table table-bordered">
+    <tr>
+        <th>Student</th>
+        <th>Fee</th>
+        <th>Amount</th>
+        <th>Method</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for payment in object_list %}
+    <tr>
+        <td>{{ payment.student.user.username }}</td>
+        <td>{{ payment.fee }}</td>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.method }}</td>
+        <td>{{ payment.payment_date }}</td>
+        <td>
+            <a href="{% url 'finance:payment_detail' payment.pk %}" class="btn btn-info btn-sm">View</a>
+            <a href="{% url 'finance:payment_edit' payment.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'finance:payment_delete' payment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

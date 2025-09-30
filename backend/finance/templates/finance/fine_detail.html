@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Fine Details</h2>
+<ul>
+  <li><strong>Student:</strong> {{ fine.student.user.username }}</li>
+  <li><strong>Reason:</strong> {{ fine.reason }}</li>
+  <li><strong>Amount:</strong> {{ fine.amount }}</li>
+  <li><strong>Issued Date:</strong> {{ fine.issued_date }}</li>
+  <li><strong>Paid:</strong> {{ fine.is_paid }}</li>
+</ul>
+<a href="{% url 'fine_update' fine.id %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'fine_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

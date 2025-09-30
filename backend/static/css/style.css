@@ -1,0 +1,12 @@
+/* Custom global styles */
+body {
+  font-family: system-ui, sans-serif;
+}
+
+/* Example: style Django form errors */
+.errorlist {
+  color: #b91c1c; /* red-700 */
+  margin: 0 0 1rem;
+  list-style: none;
+  padding: 0;
+}
